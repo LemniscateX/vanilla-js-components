@@ -7,11 +7,12 @@ const POSITION = {
 };
 
 class Tooltip {
-  constructor(el, title, placement = POSITION.TOP) {
-    const element = document.getElementById(el);
+  constructor(el, title, placement = POSITION.TOP, color = '#404040') {
+    const element = document.querySelector(`#${el}`);
     const tooltip = document.createElement('span');
 
     element.classList.add(`${PREFIX}-el`);
+    element.style.setProperty('--bg-color', color);
     tooltip.classList.add(`${PREFIX}-text`, `${PREFIX}-${placement}`);
     tooltip.innerHTML = title;
 
@@ -19,7 +20,7 @@ class Tooltip {
   }
 }
 
-new Tooltip('paragraph', 'Hints here with top position!', POSITION.TOP);
-new Tooltip('paragraph', 'Hints here!', POSITION.BOTTOM);
-new Tooltip('paragraph', 'Hints here with left position!', POSITION.LEFT);
-new Tooltip('paragraph', 'Hints here!', POSITION.RIGHT);
+new Tooltip('paragraph', 'Hints here with top position!', POSITION.TOP, '#4e519e');
+// new Tooltip('paragraph', 'Hints here!', POSITION.BOTTOM);
+// new Tooltip('paragraph', 'Hints here with left position!', POSITION.LEFT);
+// new Tooltip('paragraph', 'Hints here!', POSITION.RIGHT);

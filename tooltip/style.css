@@ -1,22 +1,16 @@
 /* GENERAL */
 
-:root {
-  --bg-color: #404040;
-  --arrow-size: 5px;
-  --gap-size: 5px;
-}
-
 .tooltip-el {
   position: relative;
+  --arrow-size: 5px;
+  --gap-size: 5px;
 }
 
 .tooltip-text {
   position: absolute;
   visibility: hidden;
   z-index: 1;
-  /* TODO: deal with width issue */
   white-space: nowrap;
-  max-width: 600px;
   padding: 8px;
   border-radius: 3px;
   color: white;
