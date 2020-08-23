@@ -3,6 +3,8 @@ class Dialog {
     title = 'Hint',
     content = 'Default Content',
     type = Dialog.TYPE.MESSAGE,
+    maskClosable = true,
+    keyboard = true,
     options: {
       okText = 'OK',
       cancelText = 'Cancel',
@@ -48,6 +50,7 @@ class Dialog {
     });
     okBtn.addEventListener('click', () => {
       handleOk.apply(this);
+      this.close();
     });
 
     // Deal with confirm-typed dialog
@@ -59,6 +62,27 @@ class Dialog {
       footer.insertBefore(cancelBtn, okBtn);
       cancelBtn.addEventListener('click', () => {
         handleCancel.apply(this);
+        this.close();
+      });
+    }
+
+    // Deal with closable mask
+
+    if (maskClosable) {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+          this.close();
+        }
+      });
+    }
+
+    // Deal with esc keypress
+
+    if (keyboard) {
+      document.addEventListener('keydown', (e) => {
+        if (this.overlay.style.display === 'block' && e.keyCode === 27) {
+          this.close();
+        }
       });
     }
 
@@ -85,13 +109,24 @@ Dialog.TYPE = {
 
 const dialog = new Dialog({
   title: '提示',
-  content: '这是一条提示',
+  content: '请前往9¾月台乘坐霍格沃兹特快列车。',
   type: Dialog.TYPE.CONFIRM,
   options: {
     okText: '确定',
     cancelText: '取消'
   }
 });
+
+// const dialog = new Dialog({
+//   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dictum, massa sit amet volutpat mattis, diam urna lobortis mauris, ut venenatis turpis nisl at enim. Integer ullamcorper nulla tristique tortor mattis pharetra. Vestibulum vel mi vitae erat finibus bibendum sit amet et purus. ',
+//   maskClosable: false,
+//   keyboard: false,
+//   options: {
+//     handleOk: () => {
+//       alert('handling ok');
+//     }
+//   }
+// });
 
 document.querySelector('#show-modal-btn').addEventListener('click', () => {
   dialog.open();
