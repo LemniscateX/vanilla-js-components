@@ -1,7 +1,7 @@
 class Tooltip {
-  constructor(el, title, placement = POSITION.TOP, color = '#404040') {
+  constructor(selector, title, placement = POSITION.TOP, color = '#404040') {
     const PREFIX = 'tooltip';
-    const element = document.querySelector(el);
+    const element = document.querySelector(selector);
     const tooltip = document.createElement('span');
 
     element.classList.add(`${PREFIX}-el`);
