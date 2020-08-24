@@ -2,8 +2,8 @@ class Tab {
   constructor({ selector, defaultActiveKey = 0, position = Tab.POSITION.TOP }) {
     const PREFIX = 'tab';
     const container = document.querySelector(selector);
-    const pane = container.children[0];
-    const content = container.children[1];
+    const [pane, content] = container.children;
+    let prevIndex = defaultActiveKey;
 
     container.classList.add(`${PREFIX}-container`);
     pane.classList.add(`${PREFIX}-pane-${position}`);
@@ -17,29 +17,18 @@ class Tab {
       // Init defaultActive pane
       if (index === defaultActiveKey) {
         item.classList.add(`${PREFIX}-pane-item-active`);
-      } else {
-        item.classList.remove(`${PREFIX}-pane-item-active`);
       }
 
       // Add event listener
-      item.addEventListener('click', (e) => {
-        const curIndex = paneChildren.indexOf(e.target);
-        // Change pane active state
-        paneChildren.forEach((item, index) => {
-          if (index === curIndex) {
-            item.classList.add(`${PREFIX}-pane-item-active`);
-          } else {
-            item.classList.remove(`${PREFIX}-pane-item-active`);
-          }
-        });
-        // Change content active state
-        contentChildren.forEach((item, index) => {
-          if (index === curIndex) {
-            item.style.display = 'block';
-          } else {
-            item.style.display = 'none';
-          }
-        });
+      item.addEventListener('click', () => {
+        // Change pane & content active state
+        if(prevIndex !== index) {
+          paneChildren[prevIndex].classList.remove(`${PREFIX}-pane-item-active`);
+          contentChildren[prevIndex].style.display = 'none';
+          prevIndex = index;
+        }
+        paneChildren[index].classList.add(`${PREFIX}-pane-item-active`);
+        contentChildren[index].style.display = 'block';
       });
     });
 
