@@ -61,5 +61,5 @@ Tab.POSITION = {
   LEFT: 'left'
 };
 
-new Tab({ selector: '#whole-stuff' });
-// new Tab({ selector: '#whole-stuff', position: Tab.POSITION.LEFT });
+const tab = new Tab({ selector: '#whole-stuff' });
+// const tab = new Tab({ selector: '#whole-stuff', position: Tab.POSITION.LEFT });

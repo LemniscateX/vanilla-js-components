@@ -8,8 +8,8 @@ class Dialog {
     options: {
       okText = 'OK',
       cancelText = 'Cancel',
-      handleOk = this.close,
-      handleCancel = this.close
+      onOk = this.close,
+      onCancel = this.close
     } = {} } = {}) {
     const PREFIX = 'dialog';
 
@@ -41,7 +41,7 @@ class Dialog {
       this.close();
     });
     okBtn.addEventListener('click', () => {
-      handleOk.apply(this);
+      onOk.apply(this);
       this.close();
     });
 
@@ -52,7 +52,7 @@ class Dialog {
       cancelBtn.classList.add(`${PREFIX}-cancel-btn`);
       footer.insertBefore(cancelBtn, okBtn);
       cancelBtn.addEventListener('click', () => {
-        handleCancel.apply(this);
+        onCancel.apply(this);
         this.close();
       });
     }
@@ -105,7 +105,7 @@ const dialog = new Dialog({
 //   maskClosable: false,
 //   keyboard: false,
 //   options: {
-//     handleOk: () => {
+//     onOk: () => {
 //       alert('handling ok');
 //     }
 //   }
